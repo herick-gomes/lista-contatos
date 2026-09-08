@@ -10,19 +10,53 @@ const BarraLateral = () => {
         (state: RootReducer) => state.contatos.itens
     )
 
+    const contactLabel =
+        contatos.length === 1 ? 'contact' : 'contacts'
+
     return (
         <S.Aside>
-            <S.Titulo>Contatos</S.Titulo>
+            <S.Brand to="/">
+                <S.BrandMark>CM</S.BrandMark>
 
-            <S.Total>
-                {contatos.length} contato(s)
-            </S.Total>
+                <S.BrandText>
+                    <strong>Contact Manager</strong>
+                    <span>Personal workspace</span>
+                </S.BrandText>
+            </S.Brand>
+
+            <S.Navigation>
+                <S.NavLabel>Workspace</S.NavLabel>
+
+                <S.NavItem $active>
+                    <S.NavIcon>⌂</S.NavIcon>
+
+                    <span>All contacts</span>
+
+                    <S.NavCount>{contatos.length}</S.NavCount>
+                </S.NavItem>
+            </S.Navigation>
+
+            <S.Overview>
+                <S.OverviewLabel>Overview</S.OverviewLabel>
+
+                <S.OverviewNumber>{contatos.length}</S.OverviewNumber>
+
+                <S.OverviewText>
+                    {contactLabel} safely stored on this device
+                </S.OverviewText>
+            </S.Overview>
 
             <Link to="/novo">
-                <S.BotaoNovo>
-                    Novo Contato
+                <S.BotaoNovo type="button">
+                    <S.PlusIcon>+</S.PlusIcon>
+                    Add new contact
                 </S.BotaoNovo>
             </Link>
+
+            <S.FooterNote>
+                <S.StatusDot />
+                Local data protection
+            </S.FooterNote>
         </S.Aside>
     )
 }

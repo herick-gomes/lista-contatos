@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { cores } from '../../styles/variaveis'
 
 type Props = {
@@ -6,38 +7,65 @@ type Props = {
 }
 
 export const Botao = styled.button<Props>`
-  min-width: 110px;
-  height: 42px;
+  min-width: 108px;
+  min-height: 39px;
 
-  padding: 0 16px;
+  padding: 0 14px;
 
-  border: none;
-  border-radius: 8px;
+  border: 1px solid
+    ${({ variante }) => {
+        switch (variante) {
+            case 'perigo':
+                return 'rgba(251, 113, 133, 0.2)'
 
-  cursor: pointer;
+            case 'secundario':
+                return cores.borda
 
-  font-size: 14px;
-  font-weight: bold;
+            default:
+                return 'rgba(34, 211, 238, 0.22)'
+        }
+    }};
 
-  color: ${cores.branco};
+  border-radius: 10px;
 
-  transition: .2s;
+  background: ${({ variante }) => {
+        switch (variante) {
+            case 'perigo':
+                return 'rgba(251, 113, 133, 0.07)'
 
-  background-color: ${({ variante }) => {
+            case 'secundario':
+                return 'rgba(148, 163, 184, 0.06)'
+
+            default:
+                return 'rgba(34, 211, 238, 0.08)'
+        }
+    }};
+
+  color: ${({ variante }) => {
         switch (variante) {
             case 'perigo':
                 return cores.vermelho
 
             case 'secundario':
-                return cores.cinza
+                return cores.cinzaClaro
 
             default:
                 return cores.verde
         }
     }};
 
-  &:hover{
+  font-size: 11px;
+  font-weight: 800;
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    filter 0.2s ease;
+
+  &:hover {
     transform: translateY(-1px);
-    opacity:.95;
+
+    filter: brightness(1.15);
   }
 `
