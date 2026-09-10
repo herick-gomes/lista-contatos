@@ -1,5 +1,7 @@
 # Contact Manager
 
+[![CI](https://github.com/herick-gomes/lista-contatos/actions/workflows/ci.yml/badge.svg)](https://github.com/herick-gomes/lista-contatos/actions/workflows/ci.yml)
+
 A modern and responsive contact management application built with React, TypeScript and Redux Toolkit.
 
 Contact Manager provides a clean workspace for creating, searching, editing and organizing contacts while keeping data persisted locally in the browser.
@@ -16,7 +18,7 @@ Contact Manager is a front-end application designed to demonstrate practical con
 
 The project was originally developed as part of my front-end studies and later redesigned and expanded into a more complete portfolio application.
 
-The portfolio version introduces a new interface, stronger validation rules, persistent storage, instant search, duplicate protection and improved responsive behavior.
+The portfolio version introduces a new interface, stronger validation rules, persistent storage, instant search, duplicate protection, responsive behavior, automated end-to-end testing and continuous integration.
 
 The original course version is preserved separately in the `course-final` branch.
 
@@ -44,6 +46,8 @@ The original course version is preserved separately in the `course-final` branch
 - Automatically generated contact initials
 - Responsive desktop, tablet and mobile layouts
 - Modern dark user interface
+- Cypress end-to-end tests
+- Automated CI with GitHub Actions
 
 ---
 
@@ -55,6 +59,8 @@ The original course version is preserved separately in the `course-final` branch
 - React Redux
 - React Router
 - Styled Components
+- Cypress
+- GitHub Actions
 - LocalStorage
 - HTML5
 - CSS3
@@ -220,24 +226,90 @@ The contact state is synchronized with `localStorage` so that changes remain ava
 
 ---
 
+## End-to-End Testing
+
+The application includes an automated end-to-end test suite built with Cypress.
+
+The current suite verifies the main user journeys:
+
+- Application loading
+- Contact creation
+- LocalStorage persistence
+- Invalid form data validation
+- Contact search
+- Contact editing
+- Contact removal
+
+Tests run against the application in a real browser environment and validate both interface behavior and persisted data.
+
+Run the end-to-end suite locally with:
+
+```bash
+npm run test:e2e
+```
+
+To open the interactive Cypress interface:
+
+```bash
+npm run test:e2e:open
+```
+
+The application must be running locally before executing the Cypress tests.
+
+---
+
+## Continuous Integration
+
+GitHub Actions automatically validates the project whenever code is pushed to `main` or a pull request targets `main`.
+
+The CI pipeline performs the following steps:
+
+```text
+Checkout repository
+        ↓
+Install Node.js
+        ↓
+Install dependencies
+        ↓
+Build application
+        ↓
+Start application
+        ↓
+Run Cypress E2E tests
+```
+
+A change is considered successful only after the production build and end-to-end test suite complete successfully.
+
+This helps catch regressions before new code is integrated into the main branch.
+
+---
+
 ## Project Structure
 
-The project follows a component-based React architecture, separating interface components, pages, state management and styling concerns.
+The project follows a component-based React architecture, separating interface components, pages, state management, styling and automated testing concerns.
 
 A simplified structure looks like:
 
 ```text
-src/
-├── components/
-├── containers/
-├── pages/
-├── store/
-├── styles/
-├── App.tsx
-└── index.tsx
+lista-contatos/
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+├── cypress/
+│   └── e2e/
+│       └── contact-manager.cy.ts
+├── src/
+│   ├── components/
+│   ├── containers/
+│   ├── models/
+│   ├── pages/
+│   ├── store/
+│   ├── styles/
+│   └── utils/
+├── cypress.config.ts
+├── package.json
+└── README.md
 ```
-
-The exact internal organization may evolve as the project continues to be refined.
 
 ---
 
@@ -293,13 +365,29 @@ npm run build
 
 Creates an optimized production build.
 
-### Tests
+### React Tests
 
 ```bash
 npm test
 ```
 
 Starts the React testing environment.
+
+### Cypress E2E Tests
+
+```bash
+npm run test:e2e
+```
+
+Runs the Cypress end-to-end test suite in headless mode.
+
+### Cypress Interactive Mode
+
+```bash
+npm run test:e2e:open
+```
+
+Opens the Cypress interactive testing interface.
 
 ---
 
@@ -338,6 +426,10 @@ Search & UX Improvements
       ↓
 Complete Visual Redesign
       ↓
+Cypress E2E Testing
+      ↓
+GitHub Actions CI
+      ↓
 Contact Manager
 ```
 
@@ -357,8 +449,11 @@ The portfolio upgrade included:
 - Improved edit workflow
 - Clickable contact actions
 - Responsive form experience
+- Cypress end-to-end coverage
+- Automated production build validation
+- Continuous integration with GitHub Actions
 
-This evolution demonstrates the process of taking a simple educational exercise and turning it into a more complete front-end application.
+This evolution demonstrates the process of taking a simple educational exercise and turning it into a more complete and professionally validated front-end application.
 
 ---
 
@@ -378,12 +473,18 @@ Contact Manager demonstrates practical experience with:
 - Styled Components
 - Responsive Web Design
 - Front-end UX patterns
+- End-to-end testing with Cypress
+- Automated CI pipelines
+- GitHub Actions
+- Production build validation
 
 ---
 
 ## Portfolio Context
 
 Contact Manager is a portfolio project created to demonstrate front-end development skills through a practical CRUD-style application.
+
+Beyond the interface itself, the project now includes automated browser testing and continuous integration to demonstrate a more complete development workflow.
 
 The current version stores information locally in the browser and does not use a remote database or authentication system.
 
